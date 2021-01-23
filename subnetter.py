@@ -68,8 +68,23 @@ if len(sys.argv) != 3:
 mask = sys.argv[2]
 IP = sys.argv[1]
 
+if mask[0] == "/":
+    mask = int(mask[1:])
+    resultMask = ""
+    for i in range(32):
+        if i % 8 == 0:
+            resultMask += "."
+        if i < mask:
+            resultMask += "1"
+        else:
+            resultMask += "0"
+    mask = resultMask[1:]
+else:
+    mask = processIP(mask)
 
-mask = processIP(mask)
+
+
+
 IP = processIP(IP)
 subnet = ""
 for k in range(len(IP)):
